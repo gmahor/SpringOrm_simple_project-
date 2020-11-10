@@ -31,7 +31,6 @@ public class StudentDao {
 	// Get the single data(object)
 	public Student getStudent(int studentId) {
 		Student student = this.hibernateTemplate.get(Student.class, studentId);
-		System.out.println(student.getStudentId()+". "+"Name-"+student.getStudentName()+" City-"+student.getStudentCity());
 		return student;
 	}
 

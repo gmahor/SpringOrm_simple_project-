@@ -1,7 +1,5 @@
 package com.spring.orm;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,8 +17,7 @@ public class App {
 		// int r = studentDao.insert(student);
 		// System.out.println("Done" + r);
 
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
+		Scanner ob = new Scanner(System.in);
 		Boolean go = true;
 		while (go) {
 			System.out.println("<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>");
@@ -28,16 +25,18 @@ public class App {
 			System.out.println("PRESS 2 for display all student.");
 			System.out.println("PRESS 3 for get detail of single student.");
 			System.out.println("PRESS 4 for delete student.");
-			System.out.println("PRESS 6 for for exit.");
-			System.out.println("Update");
 			System.out.println("PRESS 5 for update student.");
+			System.out.println("PRESS 6 for for exit.");
 			System.out.println("<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>");
 			try {
+				System.out.println("Choose Your Option.");
+				int input = Integer.parseInt(ob.next());
 
-				int input = Integer.parseInt(br.readLine());
-				Scanner ob = new Scanner(System.in);
 				switch (input) {
 				case 1:
+
+					// ADD A NEW STUDENT
+					// TAKING INPUTE FROM USERS
 
 					System.out.println("Enter Your Id.");
 					int id = ob.nextInt();
@@ -46,27 +45,43 @@ public class App {
 					System.out.println("Enter Your City.");
 					String city = ob.next();
 
+					// CREATING STUDENT OBJECT
 					Student student = new Student(id, name, city);
+
+					// SAVING STUDENT OBJECT TO DATABASE BY CALLING INSERT OF STUDENT DAO
 					int sId = studentDao.insert(student);
-					System.out.println("Student Added Successfully " + sId);
+					System.out.println();
+					System.out.println(sId + " Student Added Successfully ");
+					System.out.println("*******************************************");
+					System.out.println();
 					break;
 				case 2:
+					// FETCH ALL STUDENT
 					List<Student> list = studentDao.getAllStudents();
 					for (Student slist : list) {
-						System.out.println(slist.getStudentName());
+						System.out.println();
+						System.out.println("Id : " + slist.getStudentId());
+						System.out.println("Name : " + slist.getStudentName());
+						System.out.println("City : " + slist.getStudentCity());
+						System.out.println("---------------------------------------");
 					}
 					break;
 				case 3:
 					System.out.println("Enter ID.");
 					int studentId = ob.nextInt();
-					studentDao.getStudent(studentId);
+					Student st =studentDao.getStudent(studentId);
+					System.out.println();
+					System.out.println("Id : " + st.getStudentId());
+					System.out.println("Name : " + st.getStudentName());
+					System.out.println("City : " + st.getStudentCity());
+					System.out.println("---------------------------------------");
 					break;
 				case 4:
 
-					System.out.println("Enter ID.");
+					System.out.println("Enter User ID.");
 					int Sid = ob.nextInt();
 					studentDao.deleteStudent(Sid);
-
+					System.out.println();
 					System.out.println("Student Delete Successfully.");
 
 					break;
