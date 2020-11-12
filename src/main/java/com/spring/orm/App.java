@@ -69,7 +69,7 @@ public class App {
 				case 3:
 					System.out.println("Enter ID.");
 					int studentId = ob.nextInt();
-					Student st =studentDao.getStudent(studentId);
+					Student st = studentDao.getStudent(studentId);
 					System.out.println();
 					System.out.println("Id : " + st.getStudentId());
 					System.out.println("Name : " + st.getStudentName());
@@ -86,7 +86,22 @@ public class App {
 
 					break;
 				case 5:
-					System.out.println("Update Student.");
+					System.out.println("Enter Id.");
+					int Eid = ob.nextInt();
+
+					System.out.println("Enter Name .");
+					String Ename = ob.next();
+
+					System.out.println("Enter City.");
+					String Ecity = ob.next();
+
+					Student s = new Student(Eid, Ename, Ecity);
+
+					studentDao.updateStudent(s);
+
+					System.out.println();
+					System.out.println("Update successfully...");
+
 					break;
 				case 6:
 					System.out.println("Exit");
